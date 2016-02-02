@@ -308,7 +308,7 @@
   "visible": "true", 
   "address": {
     "city": "Chicago", 
-    "street": "North Lincoln Avenue", 
+    "street": "North Lincoln Ave", 
     "housenumber": "5157", 
     "postcode": "60625"
   }, 
@@ -337,7 +337,7 @@
     "city": "Chicago", 
     "country": "US", 
     "state": "Illinois", 
-    "street": "N. Lincoln Avenue", 
+    "street": "N. Lincoln Ave", 
     "postcode": "60625", 
     "housenumber": "4874"
   }, 
@@ -414,7 +414,7 @@
   ], 
   "address": {
     "housenumber": "1400", 
-    "street": "Baldwin Road", 
+    "street": "Baldwin Rd.", 
     "housename": "Village Hall", 
     "postcode": "60067"
   }, 
@@ -443,7 +443,7 @@
   "visible": "true", 
   "chicago:building_id": "366409", 
   "address": {
-    "street": "West Lexington Street", 
+    "street": "West Lexington St.", 
     "housenumber": "1412"
   }, 
   "type": "way", 
