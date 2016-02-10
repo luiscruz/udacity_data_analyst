@@ -61,3 +61,7 @@ venv
 
 .DS_STORE
 .ipynb_checkpoints/
+
+# R
+.RData
+.Rhistory
