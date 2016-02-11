@@ -1,12 +1,18 @@
----
-title: "Explore and Summarize Red Wine Data"
-author: "Luis Cruz"
-date: "10 Feb 2016"
-output: html_document
----
+Explore and Summarize Red Wine Data by Luis Cruz
+========================================================
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, packages}
+# Load all of the packages that you end up using
+# in your analysis in this code chunk.
+
+# Notice that the parameter "echo" was set to FALSE for this code chunk.
+# This prevents the code from displaying in the knitted HTML output.
+# You should set echo=FALSE for all code chunks in your file.
+
 library(ggplot2)
 ```
 
@@ -41,17 +47,15 @@ A description of the attributes is also given:
    11 - **alcohol** (% by volume): the percent alcohol content of the wine
 
    12 - **quality** (score between 0 and 10) -- __Output variable (based on sensory data)__
-   
 
-## Univariate Plots Section
-
-```{r read}
+```{r echo=FALSE, Load_the_Data}
+# Load the Data
 path <- "./wineQualityReds.csv"
 #path <- "https://s3.amazonaws.com/udacity-hosted-downloads/ud651/wineQualityReds.csv"
 df <- read.csv(path)
 ```
 
-### Overview
+### Dataset Overview
 ```{r overview}
 dim(df)
 names(df)
@@ -61,6 +65,8 @@ summary(df)
 
 This overview shows that all the attributes are numerical. Also we can see that the wines in this study have relatively low alcohol, since 75% of wines have between 8.40 and 11.10 by volume. This is a common feature in this kind of wine, "Vinho Verde".
 Properties such as __residual.sugar__, __chlorides__, __free.sulfur.dioxide__ and total.sulfur.dioxide seem to have outliers since the maximum is much higher than the 75% percentile.
+
+# Univariate Plots Section
 
 ### Alcohol
 ```{r acidity}
@@ -78,3 +84,84 @@ There are some outliers below 9% and above 14% alcohol by volume. Most wines are
 qplot(data = df, x=pH, binwidth=0.1)+
   scale_x_continuous(limits = c(2.7,4.1), breaks=seq(2.7,4.1,0.1))
 ```
+
+## fixed acidity
+```{r fixed.acidity}
+qplot(data = df, x=fixed.acidity, binwidth=0.5)+
+  scale_x_continuous(limits = c(4.6,15.9), breaks=seq(4.5,16,0.5))
+```
+
+# Univariate Analysis
+
+### What is the structure of your dataset?
+
+### What is/are the main feature(s) of interest in your dataset?
+
+### What other features in the dataset do you think will help support your investigation into your feature(s) of interest?
+
+### Did you create any new variables from existing variables in the dataset?
+
+### Of the features you investigated, were there any unusual distributions? Did you perform any operations on the data to tidy, adjust, or change the form of the data? If so, why did you do this?
+
+
+
+# Bivariate Plots Section
+```{r echo=FALSE, Bivariate_Plots}
+
+```
+
+# Bivariate Analysis
+
+### Talk about some of the relationships you observed in this part of the investigation. How did the feature(s) of interest vary with other features in the dataset?
+
+### Did you observe any interesting relationships between the other features (not the main feature(s) of interest)?
+
+### What was the strongest relationship you found?
+
+
+
+
+# Multivariate Plots Section
+
+```{r echo=FALSE, Multivariate_Plots}
+
+```
+
+# Multivariate Analysis
+
+### Talk about some of the relationships you observed in this part of the investigation. Were there features that strengthened each other in terms of looking at your feature(s) of interest?
+
+### Were there any interesting or surprising interactions between features?
+
+### OPTIONAL: Did you create any models with your dataset? Discuss the strengths and limitations of your model.
+
+------
+
+# Final Plots and Summary
+
+### Plot One
+```{r echo=FALSE, Plot_One}
+
+```
+
+### Description One
+
+
+### Plot Two
+```{r echo=FALSE, Plot_Two}
+
+```
+
+### Description Two
+
+
+### Plot Three
+```{r echo=FALSE, Plot_Three}
+
+```
+
+### Description Three
+
+------
+
+# Reflection
