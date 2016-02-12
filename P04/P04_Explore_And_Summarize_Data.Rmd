@@ -166,44 +166,93 @@ The only features that have correlation with quality are alcohol (0.476) and vol
 
 Although I suggested that sulphates could be negatively correlated with quality, it is not evident in this analysis. 
 
+The following sections provide scatter plots of quality with other variables.
+
 ## Quality vs. Alcohol
 
 ```{r quality_vs_alcohol}
 cor.test(df$alcohol, df$quality)
 
-ggplot(aes(x=quality, y=alcohol), data=df)+
-  #xlim(13,90)+
+p <- ggplot(aes(x=factor(quality), y=alcohol), data=df)+
   geom_point(alpha = 0.1,
-             #position = position_jitter(h=0),
              color = 'orange'
-  )+
-  #coord_trans(y="sqrt")+
-  geom_line(stat="summary", fun.y = mean)+
+  )
+p
+
+p+geom_line(stat="summary", fun.y = mean)+
   geom_line(stat="summary", fun.y = median, color='blue')
+
+ # Add linear regression line
+p  + geom_smooth(method=lm, se=FALSE)
+
+p+geom_violin(alpha=0.1, fill= "blue")
 ```
 
 ## Quality vs. Volatile Acidity
 ```{r quality_vs_volatile.acidity}
 cor.test(df$volatile.acidity, df$quality)
 
-p1 <- ggplot(aes(x=factor(quality), y=volatile.acidity), data=df)+
-  geom_point(alpha = 0.1, color = 'orange')+
-  geom_line(stat="summary", fun.y = mean)+
-  geom_line(stat="summary", fun.y = median, color='blue')
+p1 <- ggplot(aes(x=factor(quality), y=volatile.acidity), data=df)
 
-p1  
-p1+geom_violin(alpha=0.1, fill= "blue")
+#only scatter
+p1 + geom_point(alpha = 0.1, color = 'orange')
+
+#with boxplot
+p1 + geom_boxplot()+
+  geom_point(alpha = 0.1, color = 'orange')
+
+#generate the previous plot with a shape of the distribution of volatile.acidity per each quality values
+p1+ geom_boxplot()+
+  geom_violin(alpha=0.3,fill= "cyan")+
+  geom_point(alpha = 0.1, color = 'orange')
+  
 ```
 
-volatile.acidity
+## Other interesting relationships
+
+### Density vs. Fixed Acidity
+
+```{r density_vs_fixed.acidity}
+cor.test(df$density, df$fixed.acidity)
+
+p1 <- ggplot(aes(x=density, y=fixed.acidity), data=df)+
+  geom_point(alpha = 0.1,
+             color = 'orange'
+  )
+p1
+
+ # Add linear regression line
+p1 + geom_smooth(method=lm, se=FALSE)
+
+ggplot(aes(x=density, y=fixed.acidity, color=quality), data=df)+
+  geom_point(alpha = 0.3)+
+  scale_colour_gradient2(low='red', mid='yellow', high='green', midpoint=5.5)
+```
 
 # Bivariate Analysis
 
 ### Talk about some of the relationships you observed in this part of the investigation. How did the feature(s) of interest vary with other features in the dataset?
 
+The quality in this dataset presents positive correlation with alcohol (0.476) and a negative correlation with volatile acidity.
+
+The positive correlation with alcohol is interesting. Perhaps more knowledge about this kind of wine is needed to explain this relationship.
+
+The negative correlation with volatile acidity is in line with the fact that high levels of volatile acidity concentration give a vinegar taste to the wine.
+
 ### Did you observe any interesting relationships between the other features (not the main feature(s) of interest)?
 
+There are in fact some other relationships but none seem to add interesting information in our problem.
+
+Density is negatively correlated with alcohol. But that was already expected, since alcohol has lower density than water (yes, wine has water in its composition :-)).
+
+Citric acid is correlated with fixed acidity, which is expected since citric acid is a fixed acid.
+
 ### What was the strongest relationship you found?
+
+The strongest relation was between pH and fixed acidity ($-0.682$).
+pH measures the acidity of the wine. Since the acidity is given by fixed acidity and volatile acidity the sum of both is expected to be highly correlated with pH. Volatile acidity does not have much impact on pH since its values are much lower when compared to fixed acidity, as it was shown above in the summary of the dataset (median for fixed acidity is $7.90$ and while for volatile acidity is $0.52$).
+
+This is interesting because although volatile acidity is negatively correlated with the quality, it is not recognizable by the acidity of the wine.
 
 
 
@@ -212,7 +261,66 @@ volatile.acidity
 
 ```{r echo=FALSE, Multivariate_Plots}
 
+p <- ggplot(aes(x=alcohol, fill=factor(quality)), data=df)+
+  geom_histogram()
+p
 ```
+
+
+The plots with higher absolute correlation with quality are volatile.acidity and alcohol. The following plots investigate this relationship.
+
+```{r alcohol_vs_volatile.acidity_vs_quality}
+ggplot(aes(x=alcohol, y=volatile.acidity, color=quality), data=df)+
+  geom_point(alpha = 0.3)+
+  scale_colour_gradient2(low='red', mid='yellow', high='green', midpoint=5.5)
+
+# scatter plot of alcohol and volatile.acidity grouped by quality
+ggplot(aes(x=alcohol, y=volatile.acidity), data=df)+
+  geom_point(alpha = 0.3, color='orange')+
+  facet_wrap(~quality)
+```
+
+This last plot shows that for quality levels 5 and 6 the points are spread by a large region. Plots for the other quality levels show that there is a distinct pattern.
+
+Perhaps combining the quality into 3 categories might help:
+
+- Low: 3,4
+- Mid: 5,6
+- High: 7,8
+
+
+```{r }
+df$quality3 <- cut(df$quality,3, labels=c("low","mid","high"))
+                   
+ggplot(aes(x=alcohol, y=volatile.acidity, color=quality3), data=df)+
+  geom_point(alpha = 0.3)
+
+# scatter plot of alcohol and volatile.acidity grouped by quality
+ggplot(aes(x=alcohol, y=volatile.acidity), data=df)+
+  geom_point(alpha = 0.3, color='orange')+
+  facet_wrap(~quality3)
+```
+
+It did not help. Let's go back to the quality variable analysis and try to add a fourth variable.
+
+```{r}
+ggplot(aes(x=alcohol, y=volatile.acidity, color =residual.sugar), data=df)+
+  geom_point(alpha = 0.3)+
+  scale_colour_gradient2(low='red', mid='green', high='blue', midpoint=7)+
+  facet_wrap(~quality)
+  
+ggplot(aes(x=alcohol, y=volatile.acidity, color =sulphates), data=df)+
+  geom_point(alpha = 0.3)+
+  scale_colour_gradient2(low='red', mid='yellow', high='green', midpoint=1)+
+  facet_wrap(~quality)
+
+ggplot(aes(x=alcohol, y=total.sulfur.dioxide, color =sulphates), data=df)+
+  geom_point(alpha = 0.5)+
+  scale_colour_gradient2(low='red', mid='yellow', high='green')+
+  facet_wrap(~quality)
+```
+
+
 
 # Multivariate Analysis
 
