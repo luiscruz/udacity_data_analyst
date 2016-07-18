@@ -5,13 +5,20 @@ output:
     theme: default
     highlight: xcode
     menu: FALSE
+    theme.chooser: FALSE
 ---
 
 Explore and Summarize Red Wine Data by Luis Cruz
 ========================================================
 
 ```{r setup, include=FALSE}
+#globally set echo to FALSE
 knitr::opts_chunk$set(echo = FALSE)
+#globally set warnings to FALSE
+knitr::opts_chunk$set(warning = FALSE)
+#  use the bootstrap grid to adjust the size of images to the maximum width (responsive)
+knitr::opts_chunk$set(bootstrap.thumbnail.size = 'col-md-12')
+knitr::opts_chunk$set(fig.width=10, fig.height=6, fig.path='Figs/', echo=FALSE, warning=FALSE, message=FALSE)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, packages}
@@ -77,13 +84,52 @@ Properties such as __residual.sugar__, __chlorides__, __free.sulfur.dioxide__ an
 
 # Univariate Plots Section
 
+```{r helpers}
+geom_descriptive_statistics <- function(attribute_name){
+  # workaound to read the attribute_arg column name
+  attribute <<- attribute_name
+  
+  #return a list with all the lines for ggplot
+  vertical_lines <- list(
+    #mean
+    geom_vline(
+      aes(xintercept=mean(attribute)),
+      color="red"
+    ),
+    #median
+    geom_vline(
+      aes(xintercept=median(attribute)),
+      linetype="dotdash",
+      size=1
+    ),
+    # 0.75 quantile
+    geom_vline(
+      aes(xintercept=quantile(attribute,0.75)),
+      linetype="dashed",
+      size=1
+    ),
+    #0.25 quantile
+    geom_vline(
+      aes(xintercept=quantile(attribute,0.25)),
+      linetype="dashed",
+      size=1
+    ),
+    # workaround to fix error
+    # http://stackoverflow.com/questions/21560389/r-non-numeric-argument-to-binary-operator
+    NULL
+  )
+  return(vertical_lines)
+}
+```
+
 ### Quality
 
 ```{r quality}
 quality_histogram <-
-  qplot(data = df, x=quality, binwidth=1, fill=I('blue'))+
+  qplot(data = df, x=quality, binwidth=1, fill=I('lightblue'))+
   scale_x_continuous(limits = c(0,10), breaks=seq(0,10,1))
 quality_histogram
+quality_histogram+geom_descriptive_statistics(df$quality)
 ```
 
 
@@ -93,7 +139,8 @@ qplot(data = df, x=alcohol, binwidth=0.5)+
   scale_x_continuous(limits = c(8,15), breaks=seq(8,15,0.5))
 
 qplot(data = df, x=alcohol, binwidth=0.1)+
-  scale_x_continuous(limits = c(8,15), breaks=seq(8,15,0.5))
+  scale_x_continuous(limits = c(8,15), breaks=seq(8,15,0.5))+
+  geom_descriptive_statistics(df$alcohol)
 ```
 
 There are some outliers below 9% and above 14% alcohol by volume. Most wines are between 9% and 12%.
@@ -101,19 +148,23 @@ There are some outliers below 9% and above 14% alcohol by volume. Most wines are
 ### pH
 ```{r pH}
 qplot(data = df, x=pH, binwidth=0.1)+
-  scale_x_continuous(limits = c(2.7,4.1), breaks=seq(2.7,4.1,0.1))
+  scale_x_continuous(limits = c(2.7,4.1), breaks=seq(2.7,4.1,0.1))+
+  geom_descriptive_statistics(df$pH)
 ```
 
 ## Fixed acidity
 ```{r fixed.acidity}
 qplot(data = df, x=fixed.acidity, binwidth=0.5)+
-  scale_x_continuous(limits = c(4.6,15.9), breaks=seq(4.5,16,0.5))
+  scale_x_continuous(limits = c(4.6,15.9), breaks=seq(4.5,16,0.5))+
+  geom_descriptive_statistics(df$fixed.acidity)
+
 ```
 
 ## Sulphates
 ```{r sulphates}
 qplot(data = df, x=sulphates, binwidth=0.1)+
-  scale_x_continuous(limits = c(0,2), breaks=seq(0,2,0.1))
+  scale_x_continuous(limits = c(0,2), breaks=seq(0,2,0.1))+
+  geom_descriptive_statistics(df$sulphates)
 ```
 
 Most wines have sulphates between 0.4 and 0.9$g/dm^3$.
@@ -235,6 +286,7 @@ p1
  # Add linear regression line
 p1 + geom_smooth(method=lm, se=FALSE)
 ```
+
 
 # Bivariate Analysis
 
@@ -363,6 +415,10 @@ density_vs_fixed.acidity_vs_quality
 
 The blue line is the rect line that better fits the data. The error of this line shows some correlation with the quality of the wine. Perhaps rects with different slopes might make a better distinction of this interaction. For the purpose of this visualization, this is good enough.
 
+**Note:** here the chosen color scheme is continuous and going from red for low quality, passing through yellow for medium quality and finally to green for high quality. The ordering in this color scheme should be easy to understand since we are familiar with the same scheme in other examples, for instance in "danger scales".
+The reason why a dual color scheme is not used is because these points are not opaque and the quality information can be easily mixed with the count of points in that region.
+
+
 ## Linear Regression
 
 It might be interesting to fit a linear model in this data.
@@ -442,7 +498,8 @@ quality_histogram+
 ### Description One
 
 This histogram shows the distribution of the wine quality.
-This is relevant because it shows that most of the observed wines have quality 5 and 6.
+The red line shows the mean with 5.64. The regular dashed line shows the 0.25 quantile at quality 5, while the irregular line shows two lines combined at quality 6: the median and the 0.75 quantile.
+This plot is relevant because it shows that most of the observed wines have quality 5 and 6.
 
 This biased distribution has to be taken into account when evaluating a model to classify wine quality. The interest of having such a model is mostly to detect bad wines or good wines. Nevertheless, a low risk model that mostly classifies a wine as medium quality will have high scores due to this distribution. 
 
@@ -457,10 +514,16 @@ alcohol_vs_volatile.acidity_vs_quality+
 ### Description Two
 
 This scatter plot presents the correlation between volatile acidity and quality.
-These are the features that present significant correlation with quality.
+In the xx we have alcohol which can go from 8.40 to 14.90.
+In the yy we have fixed acidity which can go from 0.12 to 1.58.
+
+These are the features that revealed significant correlation with quality.
 Thus, the plot also shows the quality of each wine using a continuous color code. Red stands for low quality, yellow for medium quality and green for high quality.
 
 The correlation of these features with quality is evident. It is possible to distinguish different regions according to the quality of the wine.
+
+This plot shows the viability of creating a linear model using these 2 features to estimate the quality of wines "Vinho Verde".
+As seen previously in this document it is possible to fit a linear regression model with $R^2=0.32$.
 
 
 ### Plot Three
@@ -472,9 +535,21 @@ density_vs_fixed.acidity_vs_quality+
 ### Description Three
 
 This scatter plot presents the correlation between fixed acidity and density.
-In addition it also shows the quality of each wine using a continuous color code. Red stands for low quality, yellow for medium quality and green for high quality.
+In the xx we have density which can go from 0.990 to 1.004.
+In the yy we have fixed acidity which can go from 4.60 to 15.90.
 
-Finnaly, a linear regression line was added. Since fixed acidity and density have high correlation, this line is easy to figure. However, this gives higher contrast to the fact that we can distuinguish a region with more greens above this line. This means that it is possible to find a rect line in which the error with sign can be correlated with the quality of the wine.
+This plot also shows the quality of each wine using a continuous color code. Red stands for low quality, yellow for medium quality and green for high quality.
+
+Finally, a linear regression line was added.
+
+```{r fixed.acidity_by_density_linear_regression}
+lm(fixed.acidity ~ density, df)
+```
+
+Since fixed acidity and density have high correlation, this line is easy to figure.
+What makes this plot interesting is the fact that it shows that we can distinguish a region with more greens above this regression line, $y=616.3*x-606.0$.
+
+This means that it is possible to find a rect line in which the error with sign can be correlated with the quality of the wine.
 
 
 
@@ -489,4 +564,14 @@ Also, the finding that density and fixed acidity might help in the estimation of
 The amount of sugar in the wine did not correlate with the quality. This is an important conslusion, since sweetness is usually an easy property to spot by beginners.
 
 In this report, only linear models were used to fit data. Since the dataset has a good number of observations (1599), it might be interesting to try more complex machine learning algorithms.
+
+The dataset used for this study was already clean and did not have non-valid values, which made the analysis a lot easier.
+Perhaps it would be interesting to have additional columns (e.g, price) to find new correlations.
+However, the authors did not disclose the name the wines in the dataset due to privacy reasons.
+This prevents from joining the dataset with other data that could provide interesting findings.
+
+Another struggle in this problem is that usually wine is not evaluated using chemical properties.
+It is usally evaluated by sensitive properties, which although it is related with chemical properties, this relation is not that simple.
+
+Finally, "Vinho Verde" wines can be made of different kinds of grapes (e.g, "Amaral", "Azal Tinto", "Borra??al", etc.). This information is not present in the dataset but perhaps different kinds of wines might have also different chemical composition regardless of quality.
 
