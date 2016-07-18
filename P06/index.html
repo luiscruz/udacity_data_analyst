@@ -1,0 +1,79 @@
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>What makes you stop using an app?</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.2.0.min.js"></script>
+</head>
+<body>
+  <style>
+  </style>
+  <div class='container'>
+  <h1>
+    Ranking of reasons to uninstall a mobile Application
+  </h1>
+    <p>Ling, Soo et al. conducted a study about mobile app users behaviors. They surveyed 10,208 people from more than 15 countries on their mobile app usage behavior (1).
+    One of the questions in the survey was:
+    </p>
+    <blockquote>
+    <p>
+      <em> What makes you stop using an app?</em>
+    </p>
+    </blockquote>
+    Results were split between Android and iOS platforms and displayed using a bar chart. Hover the bars to go into detail.
+    <div id='canvas'>
+      </div>
+      
+    <h4>Notes:</h4>
+    <p>
+      Since a participant could give more than one answer, the weight of his/her answer was divided by the number of answers he/she gave.
+    </p>
+    
+    <h4>References:</h4>
+    <div>
+      (1) Soo Ling Lim, Peter J. Bentley, Natalie Kanakam, Fuyuki Ishikawa, and Shinichi Honiden (2015). Investigating Country Differences in Mobile App User Behavior and Challenges for Software Engineering. IEEE Transactions on Software Engineering (TSE), vol 41 issue 1, pp 40-64.
+    </div>
+</div>
+
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#canvas", 900, 400);
+    d3.csv("./data/data_dimple_agg_user_dropoff.csv", function (data) {
+      
+   
+      
+      console.table(data);
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(300, 30, 500, 330);
+      x = myChart.addMeasureAxis("x", "value");
+      var y = myChart.addCategoryAxis("y", ["answer", "platform"]);
+      y.addOrderRule("value");
+      var s = myChart.addSeries("platform", dimple.plot.bar);
+      myChart.addLegend(65, 10, 720, 20, "right");
+      
+      myChart.defaultColors = [
+                new dimple.color("#2ecc71", "#27ae60", 1), // green
+                new dimple.color("#3498db", "#2980b9", 1), // blue
+      ]
+      x.title = "Portion of users";
+      y.title = "Answer/Platform";
+      
+   svg.append("text")
+      .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
+      .attr("y", myChart._yPixels() - 20)
+      .style("text-anchor", "middle")
+      .style("font-family", "sans-serif")
+      .style("font-weight", "bold")
+      .text("My brilliant chart about a and b");
+      
+      myChart.draw();
+      // y.shapes.selectAll("text").attr("transform", "rotate(-45)");
+    });
+  </script>
+</body>
+</html>
