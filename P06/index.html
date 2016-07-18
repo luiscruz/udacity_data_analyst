@@ -15,8 +15,9 @@
   <style>
   </style>
   <div class='container'>
-  <h1>
+  <h1 class='page-header'>
     Ranking of reasons to uninstall a mobile Application
+    <br/><small>A <a target='_blank' href="https://www.udacity.com/course/data-analyst-nanodegree--nd002">Udacity</a> project by <a target='_blank' href="http://luiscruz.github.io">Luis Cruz</a></small>
   </h1>
     <p>Ling, Soo et al. conducted a study about mobile app users behaviors. They surveyed 10,208 people from more than 15 countries on their mobile app usage behavior (1).
     One of the questions in the survey was:
@@ -42,19 +43,19 @@
 </div>
 
   <script type="text/javascript">
-    var svg = dimple.newSvg("#canvas", 900, 400);
+    var svg = dimple.newSvg("#canvas", 900, 420);
     d3.csv("./data/data_dimple_agg_user_dropoff.csv", function (data) {
       
    
       
       console.table(data);
       var myChart = new dimple.chart(svg, data);
-      myChart.setBounds(300, 30, 500, 330);
+      myChart.setBounds(300, 50, 500, 330);
       x = myChart.addMeasureAxis("x", "value");
       var y = myChart.addCategoryAxis("y", ["answer", "platform"]);
       y.addOrderRule("value");
       var s = myChart.addSeries("platform", dimple.plot.bar);
-      myChart.addLegend(65, 10, 720, 20, "right");
+      myChart.addLegend(65, 30, 720, 20, "right");
       
       myChart.defaultColors = [
                 new dimple.color("#2ecc71", "#27ae60", 1), // green
@@ -63,13 +64,15 @@
       x.title = "Portion of users";
       y.title = "Answer/Platform";
       
+    // add title
    svg.append("text")
-      .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
-      .attr("y", myChart._yPixels() - 20)
+      .attr("x", myChart._xPixels() + myChart._widthPixels() / 2 -150)
+      .attr("y", myChart._yPixels() - 10)
       .style("text-anchor", "middle")
       .style("font-family", "sans-serif")
-      .style("font-weight", "bold")
-      .text("My brilliant chart about a and b");
+      .style("font-size", "12pt")
+      // .style("font-weight", "bold")
+      .text("What makes you stop using an app?");
       
       myChart.draw();
       // y.shapes.selectAll("text").attr("transform", "rotate(-45)");
