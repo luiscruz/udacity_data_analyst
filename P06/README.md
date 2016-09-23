@@ -9,8 +9,8 @@ Results were split between Android and iOS platforms and displayed using a bar c
 I've decided to use a horizontal bar chart using Dimple.js. Although this is a very basic chart, that is exactly the point. Adding more features to the visualization would require extra effort from readers.
 
 The color was used to distinguish the platform.
-Length was used to code the portion of users.
-The position was used for the answer selected by the user.
+Length was used to code the portion of users. Since a participant could give more than one answer, the weight of his/her answer was divided by the number of answers he/she gave.
+The position was used for the answer selected by the participant.
 
 ## Feedback
 
