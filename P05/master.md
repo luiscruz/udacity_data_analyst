@@ -14,10 +14,9 @@ In this project, I have analyzed financial and email data with the goal of ident
 
 The set of features used in the final model were:
 
-- poi
-- deferred\_income
-- director\_fees
-- restricted\_stock\_deferred
+- from_poi_to_this_person
+- total_stock_value
+- total_payments
 
 The model was optimized using the following evaluation function:
 
