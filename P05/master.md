@@ -10,7 +10,40 @@ In this project, I have analyzed financial and email data with the goal of ident
 
 ##### What features did you end up using in your POI identifier, and what selection process did you use to pick them? Did you have to do any scaling? Why or why not? As part of the assignment, you should attempt to engineer your own feature that does not come ready-made in the dataset -- explain what feature you tried to make, and the rationale behind it. (You do not necessarily have to use it in the final analysis, only engineer and test it.) In your feature selection step, if you used an algorithm like a decision tree, please also give the feature importances of the features that you use, and if you used an automated feature selection function like SelectKBest, please report the feature scores and reasons for your choice of parameter values.  [relevant rubric items: “create new features”, “properly scale features”, “intelligently select feature”]
 
+#### Feature Engineering
+
+The set of features used in the final model were:
+
+- poi
+- deferred\_income
+- director\_fees
+- restricted\_stock\_deferred
+
+The model was optimized using the following evaluation function:
+
+\begin{function}
+f(x) = Precision+1.2*Recall+1-abs(Precision-Recall)
+\end{function}
+
+The idea was to promote models with good precision and recall. However we to emphasize recall (using a 1.2 factor) while having a small difference between the two measures. 
+
+The idea of giving more relevance to Recall is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
+
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
+
+**X** algorithms were used to generate models of POI:
+
+- Gaussian Naive Bayes
+- Random Forest
+- ...
+
+The best model was produced using **Gaussian Naive Bayes** providing:
+
+Metric | Value
+---|---
+Recall | x.xx
+Precision | x.xx
+F1 | x.xx 
 
 ##### What does it mean to tune the parameters of an algorithm, and what can happen if you don’t do this well?  How did you tune the parameters of your particular algorithm? (Some algorithms do not have parameters that you need to tune -- if this is the case for the one you picked, identify and briefly explain how you would have done it for the model that was not your final choice or a different model that does utilize parameter tuning, e.g. a decision tree classifier).  [relevant rubric item: “tune the algorithm”]
 
