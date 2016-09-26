@@ -14,6 +14,29 @@ The position was used for the answer selected by the participant.
 
 ## Feedback
 
+#### Rui ([ruimaranhao](https://discussions.udacity.com/users/ruimaranhao/activity))
+
+> This visualization is interesting. I wonder if you could show the same message for different demographics?
+
+#### Andrew ([CtrlAltDel](https://discussions.udacity.com/users/CtrlAltDel/activity))
+
+> @luismirandacruz,
+
+> Very clean visualization. I like how the intro started off with the key literature reference. I think most people would be able to pick some key findings from this visualization.One overall finding that I find interesting is that Android and Apple users seems to agree on what influences them to drop an app, so for the most part whether or not to keep or drop an app is largely platform independent. What might be interesting is to determine where reasoning is not platform independent. This could make for an important business insight.
+> Per the suggestion offered by @ruimaranhao showing results per some other factor (country for example) would be very informative.
+
+> The one big recommendation I offer is to consider changing the color palette to a color blind friendly palette. Blue green color blindness is very common, especially among men, and this color scheme could be problematic. Whenever I get visualization feedback I try to include someone who is colorblind, just to make sure that my color choices are not impacting that segment of the population.
+
+Note that some recommended palettes can be found in the course materials.
+
+### Improvements
+
+Unfortunately, the dataset made public does not provide demographics or any other personal information about participants.
+Thus, some of the suggested improvements could not be implemented.
+
+The color palette used was reviewed. Colorblind readers should not have a problem reading the visualization and less bright colors were used.
+
+
 ## Resources
 
 - https://soolinglim.wordpress.com/datasets/
