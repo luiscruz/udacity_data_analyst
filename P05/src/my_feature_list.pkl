@@ -1,10 +1,10 @@
-(S'director_fees'
-p0
-S'from_poi_to_this_person'
+(lp0
+S'poi'
 p1
-S'total_stock_value'
+aS'long_term_incentive'
 p2
-S'total_payments'
+aS'bonus'
 p3
-tp4
-.
+aS'deferred_income'
+p4
+a.
