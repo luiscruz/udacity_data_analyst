@@ -48,16 +48,16 @@ signal.signal(signal.SIGINT, signal_handler)
 
 ### Task 1: Select what primary features you'll use.
 features_top10 = [
- 'deferred_income',
+ 'exercised_stock_options',
  'total_stock_value',
- 'from_messages',
  'bonus',
- 'other',
- 'restricted_stock',
+ 'salary',
+ 'salary_bonus_ratio',
+ 'deferred_income',
  'long_term_incentive',
- 'expenses',
- 'restricted_stock_deferred',
- 'salary'
+ 'restricted_stock',
+ 'total_payments',
+ 'shared_receipt_with_poi',
  ]
 
 ### Load the dictionary containing the dataset
@@ -65,8 +65,17 @@ with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Task 2: Remove outliers
+
+del data_dict['TOTAL']
+
 ### Task 3: Create new feature(s)
 
+#add salary_bonus_ratio = bonus/salary
+for _,obj in data_dict.items():
+    salary_bonus_ratio = np.float(obj['bonus'])/np.float(obj['salary'])
+    if np.isnan(salary_bonus_ratio):
+        salary_bonus_ratio = -1
+    obj['salary_bonus_ratio'] = salary_bonus_ratio
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
@@ -98,7 +107,7 @@ for L in range(2, 5):
     # of simplicity we will be using it
             classifiers = [
                 GaussianNB(),
-                # RandomForestClassifier(n_estimators=100),
+                RandomForestClassifier(n_estimators=100),
                 QuadraticDiscriminantAnalysis(),
             ]
     
