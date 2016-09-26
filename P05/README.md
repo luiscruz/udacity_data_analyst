@@ -12,21 +12,23 @@ In this project, I have analyzed financial and email data with the goal of ident
 
 #### Feature Engineering
 
-The set of features used in the final model were:
+Feature selection was performed using the automated function *SelectKBest*.
+The result of the analysis is shown in the Figure below.
 
-- from_poi_to_this_person
-- total_stock_value
-- total_payments
+![](./figures/feature_selection.png)
 
-The model was optimized using the following evaluation function:
+We select the 5 top features:
 
-\begin{function}
-f(x) = Precision+1.2*Recall+1-abs(Precision-Recall)
-\end{function}
+- shared\_receipt\_with\_poi
+- from\_poi\_to\_this\_person
+- loan\_advances
+- from\_this\_person\_to\_poi
+- to\_messages
 
-The idea was to promote models with good precision and recall. However we to emphasize recall (using a 1.2 factor) while having a small difference between the two measures. 
 
-The idea of giving more relevance to Recall is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
+
+
+
 
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
 
@@ -36,7 +38,17 @@ The idea of giving more relevance to Recall is because in the investigation we w
 - Random Forest
 - ...
 
-The best model was produced using **Gaussian Naive Bayes** providing:
+The model was optimized using the following evaluation function:
+
+\begin{function}
+f(x) = Precision+1.2*Recall+1-abs(Precision-Recall)
+\end{function}
+
+The idea was to promote models with good precision and recall. However we want to emphasize recall (using a 1.2 factor) while having a small difference between the two measures. 
+
+The idea of giving more relevance to Recall is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
+
+The best model was produced using **Gaussian Naive Bayes**, providing:
 
 Metric | Value
 ---|---

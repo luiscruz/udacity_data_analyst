@@ -52,6 +52,7 @@ features_list_original = ['poi','salary'] # You will need to use more features
 features_list_with_pois = features_list_original + ['from_this_person_to_poi','from_poi_to_this_person']
 features_list_with_expenses = features_list_original + ['expenses']
 features_all = [
+    'poi',
     'salary',
     'to_messages',
     'deferral_payments',
