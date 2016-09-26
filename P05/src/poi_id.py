@@ -10,6 +10,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score,recall_score,precision_score
 sys.path.append("./tools/")
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
@@ -45,53 +46,48 @@ def signal_handler(signal, frame):
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-### Task 1: Select what features you'll use.
-### features_list is a list of strings, each of which is a feature name.
-### The first feature must be "poi".
-features_list_original = ['poi','salary'] # You will need to use more features
-features_list_with_pois = features_list_original + ['from_this_person_to_poi','from_poi_to_this_person']
-features_list_with_expenses = features_list_original + ['expenses']
-features_all = [
-    'poi',
-    'salary',
-    'to_messages',
-    'deferral_payments',
-    'total_payments',
-    'exercised_stock_options',
-    'bonus',
-    'restricted_stock',
-    'shared_receipt_with_poi',
-    'restricted_stock_deferred',
-    'total_stock_value',
-    'expenses',
-    'loan_advances',
-    'from_messages',
-    'other',
-    'from_this_person_to_poi',
-    'director_fees',
-    'deferred_income',
-    'long_term_incentive',
-    # 'email_address',
-    'from_poi_to_this_person',
-]
-features_list=features_all
+### Task 1: Select what primary features you'll use.
+features_top10 = [
+ 'exercised_stock_options',
+ 'total_stock_value',
+ 'bonus',
+ 'salary',
+ 'salary_bonus_ratio',
+ 'deferred_income',
+ 'long_term_incentive',
+ 'restricted_stock',
+ 'total_payments',
+ 'shared_receipt_with_poi',
+ ]
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Task 2: Remove outliers
+
+del data_dict['TOTAL']
+
 ### Task 3: Create new feature(s)
+
+#add salary_bonus_ratio = bonus/salary
+for _,obj in data_dict.items():
+    salary_bonus_ratio = np.float(obj['bonus'])/np.float(obj['salary'])
+    if np.isnan(salary_bonus_ratio):
+        salary_bonus_ratio = -1
+    obj['salary_bonus_ratio'] = salary_bonus_ratio
+
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
 
 ### Extract features and labels from dataset for local testing
 best_solution_so_far = None
 optimization_path = []
-
 #cycle to try several features
 for L in range(2, 5):
-    for features_list in itertools.permutations(features_all, L):
+    # for features in [features_tail5[:]]:
+    for features in itertools.permutations(features_top10, L):
+        features_list = ['poi'] + list(features)
         try:
             print ""
             print "------------------------------------------------------------"
@@ -111,7 +107,8 @@ for L in range(2, 5):
     # of simplicity we will be using it
             classifiers = [
                 GaussianNB(),
-                # RandomForestClassifier(n_estimators=100),
+                RandomForestClassifier(n_estimators=100),
+                QuadraticDiscriminantAnalysis(),
             ]
     
     ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
