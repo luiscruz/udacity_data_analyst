@@ -12,6 +12,8 @@ The color was used to distinguish the platform.
 Length was used to code the portion of users. Since a participant could give more than one answer, the weight of his/her answer was divided by the number of answers he/she gave.
 The position was used for the answer selected by the participant.
 
+The final version of the visualization can be reached [here](https://rawgit.com/luiscruz/udacity_data_analyst/master/P06/index.html).
+
 ## Feedback
 
 #### Rui ([ruimaranhao](https://discussions.udacity.com/users/ruimaranhao/activity))
