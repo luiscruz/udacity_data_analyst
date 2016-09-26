@@ -26,10 +26,6 @@ We select the 5 top features:
 - to\_messages
 
 
-
-
-
-
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
 
 **X** algorithms were used to generate models of POI:
