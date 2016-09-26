@@ -27,11 +27,11 @@ The position was used for the answer selected by the participant.
 
 > The one big recommendation I offer is to consider changing the color palette to a color blind friendly palette. Blue green color blindness is very common, especially among men, and this color scheme could be problematic. Whenever I get visualization feedback I try to include someone who is colorblind, just to make sure that my color choices are not impacting that segment of the population.
 
-Note that some recommended palettes can be found in the course materials.
+> Note that some recommended palettes can be found in the course materials.
 
 ### Improvements
 
-Unfortunately, the dataset made public does not provide demographics or any other personal information about participants.
+Unfortunately, the dataset made public by the authors does not provide demographics or any other personal information about participants.
 Thus, some of the suggested improvements could not be implemented.
 
 The color palette used was reviewed. Colorblind readers should not have a problem reading the visualization and less bright colors were used.
