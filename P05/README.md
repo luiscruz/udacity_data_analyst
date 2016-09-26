@@ -65,9 +65,9 @@ person['bonus']/person['salary']
 Several subsets of the feature set were experimented by generating subsets of size 2,3,4, and 5.
 This optimization used the following evaluation function for the resultant model:
 
-\begin{function}
+```
 f(x) = Precision+1.2*Recall+1-abs(Precision-Recall)
-\end{function}
+```
 
 The idea was to promote models with good precision and recall. However we want to emphasize recall (using a 1.2 factor) while having a small difference between the two measures. 
 
