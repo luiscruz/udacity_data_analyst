@@ -109,3 +109,6 @@ A precision of 0.67, meaning that we expect that 67% of people indicated as POI 
 
 Two distinct sets were extracted from the original dataset --- train set and test set --- using a random split of 70% and 30% proportion, respectively.
 This is an important step since, a common mistake is using data in the test phase that was already used to create the model, leading to **overfitting**.
+
+----
+**Note:** Further details about the data exploration can be found in the IPython Notebook ```Data exploration.ipynb```
