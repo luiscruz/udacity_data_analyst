@@ -103,4 +103,4 @@ Two distinct sets were extracted from the original dataset --- train set and tes
 This is an important step since, a common mistake is using data in the test phase that was already used to create the model, leading to **overfitting**.
 
 ----
-**Note:** Further details about the data exploration can be found in the IPython Notebook ```src/Data\ exploration.ipynb```
+**Note:** Further details about the data exploration can be found in the IPython Notebook ```./src/Data\ exploration.ipynb```
