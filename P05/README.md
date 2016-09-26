@@ -49,6 +49,7 @@ Since some of these features might be correlated, we are going to evaluate model
 
 ##### Feature extraction
 
+
 A very simple feature was created from the original dataset.
 The plot below illustrates the correlation between Bonus and Salary.
 
@@ -60,7 +61,6 @@ Thus, the feature 'salary\_bonus\_ratio' was created to measure the ratio betwee
 ```
 person['bonus']/person['salary']
 ```
-
 
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
 
