@@ -10,14 +10,6 @@ In this project, I have analyzed financial and email data with the goal of ident
 
 #### Outlier removal
 
-
-
-![Expenses](figures/expenses.png)
-
-We can see that there is an outlier.
-This outlier is a stored with the name 'TOTAL' which means that such item should be removed from our data.
-
-
 While analyzing Expenses using the plot below, an outlier was identified.
 The plot shows the values of expenses per person.
 Apparently 'TOTAL' was stored as a person.
