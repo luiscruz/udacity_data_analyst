@@ -5,9 +5,8 @@ import signal
 import pickle
 import numpy as np
 import itertools
-from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import StratifiedShuffleSplit
 from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score,recall_score,precision_score
 sys.path.append("./tools/")
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
@@ -96,6 +95,8 @@ for L in range(2, 5):
             print features_list
             data = featureFormat(my_dataset, features_list, sort_keys = True)
             labels, features = targetFeatureSplit(data)
+            labels = np.array(labels)
+            features = np.array(features)
     
     ### Task 4: Try a varity of classifiers
     ### Please name your classifier clf for easy export below.
@@ -107,7 +108,6 @@ for L in range(2, 5):
     # of simplicity we will be using it
             classifiers = [
                 GaussianNB(),
-                RandomForestClassifier(n_estimators=100),
                 QuadraticDiscriminantAnalysis(),
             ]
     
@@ -119,17 +119,22 @@ for L in range(2, 5):
     ### http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedShuffleSplit.html
     
     # Example starting point. Try investigating other evaluation techniques!        
-            features_train, features_test, labels_train, labels_test = \
-                train_test_split(features, labels, test_size=0.3, random_state=42)
-            
+            sss = StratifiedShuffleSplit(labels, 3, test_size=0.3, random_state=42)
             # function that evaluates each classifier
             def evaluate_classifier(classifier):
-                classifier.fit(features_train, labels_train)
-                predictions = classifier.predict(features_test)
+                global_predictions = []
+                global_labels = []
+                for train_index, test_index in sss:
+                    features_train, features_test = features[train_index], features[test_index]
+                    labels_train, labels_test = labels[train_index], labels[test_index]
+                    classifier.fit(features_train, labels_train)
+                    predictions = classifier.predict(features_test)
+                    global_labels = np.append(global_labels, labels_test)
+                    global_predictions = np.append(global_predictions,predictions)
                 return (
-                    precision_score(labels_test, predictions, pos_label=1, average='macro'),
-                    recall_score(labels_test, predictions, pos_label=1, average='macro'),
-                    f1_score(labels_test, predictions, pos_label=1, average='macro'),
+                    precision_score(global_labels, global_predictions, pos_label=1, average='binary'),
+                    recall_score(global_labels, global_predictions, pos_label=1, average='binary'),
+                    f1_score(global_labels, global_predictions, pos_label=1, average='binary'),
                     classifier
                 )
                     

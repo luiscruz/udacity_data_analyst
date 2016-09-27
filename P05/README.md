@@ -120,6 +120,7 @@ The idea was to promote models with good precision and recall. However we want t
 The idea of giving more relevance to *Recall* is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
 
 ##### Parameter Tuning
+
 Some machine learning algorithms are highly sensitive to parameters (e.g., SVMs).
 Thus, it is important to make sure the algorithm is executed with the set of parameters that are optimal for the given problem.
 This can be implemented using a *Grid Search* in which the same algorithm is consecutively experimented with different settings.
@@ -134,24 +135,33 @@ The best model was produced using **Gaussian Naive Bayes** with the following fe
 
 - long\_term\_incentive
 - deferred\_income
+- salary
 - total\_stock\_value
-- exercised\_stock\_options
 
 The performance of this model is in the Table below.
 
 Metric | Value
 ---|---
-Recall | 0.67   
-Precision | 0.67
-F1 | 0.67 
+Recall | 0.60   
+Precision | 0.69
+F1 | 0.64 
 
-This model has a recall of 0.67 meaning that we expect that we are only able to detect 67% of people that actually is of interest.
-A precision of 0.67, meaning that we expect that 67% of people indicated as POI will actually be a POI.
+This model has a recall of 0.60 meaning that we expect that we are only able to detect 60% of people that actually is of interest.
+A precision of 0.69, meaning that we expect that 69% of people indicated as POI will actually be a POI.
 
 ##### Validation results
 
+I have executed the selected model with the validation dataset by running the script ```./src/tester.py```.
+I got the following results:
 
-
+```
+GaussianNB()
+  Accuracy: 0.85914	Precision: 0.50916	Recall: 0.38900
+  F1: 0.44104	F2: 0.40827
+  Total predictions: 14000
+  True positives:   778	False positives:  750
+  False negatives: 1222	True negatives: 11250
+```
 
 ##### Model Validation
 
