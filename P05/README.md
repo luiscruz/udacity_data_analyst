@@ -102,10 +102,9 @@ I.e., for every combination of features with length from 2 to 5, a model was gen
 
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
 
-**Three** algorithms were used to generate models of Person Of Interest (POI):
+**Two** algorithms were used to generate models of Person Of Interest (POI):
 
 - [Gaussian Naive Bayes](http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB)
-- [Random Forest with 100 trees](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier)
 - [Quadratic Discriminant Analysis](http://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis)
 
 Several subsets of the feature set were experimented by generating subsets of size 2,3,4, and 5.
@@ -119,6 +118,14 @@ The idea was to promote models with good precision and recall. However we want t
 
 The idea of giving more relevance to *Recall* is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
 
+##### Train and test sets
+
+When evaluating models, an important step is splitting data in training and test set. Data points used to train a model should never be used to evaluate the model. Ignoring this can lead to **overfitting**.
+Thus, I have used Stratified Shuffle Splitting with a 70/30 split (i.e., 70% of data was used for training and 30% for testing). In addition, we repeated this technique in 3 iterations, allowing to evaluate algorithms with different data.
+
+Two distinct sets were extracted from the original dataset --- train set and test set --- using a random split of 70% and 30% proportion, respectively.
+This is an important step since, a common mistake is using data in the test phase that was already used to create the model, leading to .
+
 ##### Parameter Tuning
 
 Some machine learning algorithms are highly sensitive to parameters (e.g., SVMs).
@@ -127,7 +134,6 @@ This can be implemented using a *Grid Search* in which the same algorithm is con
 The optimal set of parameters is selected from the model that had the best performance.
 Performance metrics can be *Recall*, *Precision*, or *F1*.
 In this study, I have not included algorithms that would benefit from parameter tuning.
-I have tuned Random Forest to 100 trees, since this is a common setting for this algorithm.
 
 ##### Results of the algorithm and feature selection
 
@@ -163,10 +169,7 @@ GaussianNB()
   False negatives: 1222	True negatives: 11250
 ```
 
-##### Model Validation
 
-Two distinct sets were extracted from the original dataset --- train set and test set --- using a random split of 70% and 30% proportion, respectively.
-This is an important step since, a common mistake is using data in the test phase that was already used to create the model, leading to **overfitting**.
 
 ----
 **Note:** Further details about the data exploration can be found in the IPython Notebook ```./src/Data\ exploration.ipynb```
