@@ -8,6 +8,35 @@ In this project, I have analyzed financial and email data with the goal of ident
 
 ##### What features did you end up using in your POI identifier, and what selection process did you use to pick them? Did you have to do any scaling? Why or why not? As part of the assignment, you should attempt to engineer your own feature that does not come ready-made in the dataset -- explain what feature you tried to make, and the rationale behind it. (You do not necessarily have to use it in the final analysis, only engineer and test it.) In your feature selection step, if you used an algorithm like a decision tree, please also give the feature importances of the features that you use, and if you used an automated feature selection function like SelectKBest, please report the feature scores and reasons for your choice of parameter values.  [relevant rubric items: “create new features”, “properly scale features”, “intelligently select feature”]
 
+
+#### Dataset description
+
+The dataset has 21 features, including the label POI, for 146 data points.
+Some features provide NaN:
+
+Feature | Missing values
+---|---
+salary | 51
+to\_messages | 59
+deferral\_payments | 107
+total\_payments | 21
+exercised\_stock\_options | 44
+bonus | 64
+restricted\_stock | 36
+shared\_receipt\_with\_poi | 59
+restricted\_stock\_deferred | 128
+total\_stock\_value | 20
+expenses | 51
+loan\_advances | 142
+from\_messages | 59
+other | 53
+from\_this\_person\_to\_poi | 59
+director\_fees | 129
+deferred\_income | 97
+long\_term\_incentive | 80
+email\_address | 34
+from\_poi\_to\_this\_person | 59
+
 #### Outlier removal
 
 
@@ -25,6 +54,23 @@ Apparently 'TOTAL' was stored as a person.
 ![Expenses](figures/expenses.png)
 
 #### Feature Engineering
+
+##### Feature extraction
+
+
+A very simple feature was created from the original dataset.
+The plot below illustrates the correlation between Bonus and Salary.
+
+![Bonus And Salary](figures/bonus_and_salary.png)
+
+It is interesting to note that some employees have a really high bonus when comparing to their own salary.
+Thus, the feature 'salary\_bonus\_ratio' was created to measure the ratio between bonus and salary.
+
+```
+person['bonus']/person['salary']
+```
+
+##### Feature Selection
 
 Feature selection was performed using the automated function *SelectKBest*.
 The result of the analysis is shown in the Figure below.
@@ -45,22 +91,11 @@ From this analysis we select the 10 top features:
 - shared\_receipt\_with\_poi
 - loan\_advances
 
-Since some of these features might be correlated, we are going to evaluate models using different feature sets generated from this top10.
+Although I've selected 10 features this is not going to be our final feature set.
+Since some of these features might be correlated, I evaluate models using different feature sets generated from this top10.
+I.e., for every combination of features with length from 2 to 5, a model was generated and evaluated. E.g., try {exercised\_stock\_options, total\_stock\_value} then {exercised\_stock\_options, bonus}, and so on. This procedure explained in more detail later in this document.
 
-##### Feature extraction
 
-
-A very simple feature was created from the original dataset.
-The plot below illustrates the correlation between Bonus and Salary.
-
-![Bonus And Salary](figures/bonus_and_salary.png)
-
-It is interesting to note that some employees have a really high bonus when comparing to their own salary.
-Thus, the feature 'salary\_bonus\_ratio' was created to measure the ratio between bonus and salary.
-
-```
-person['bonus']/person['salary']
-```
 
 ##### What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]
 
