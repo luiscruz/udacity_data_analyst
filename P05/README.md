@@ -67,6 +67,12 @@ Thus, the feature 'salary\_bonus\_ratio' was created to measure the ratio betwee
 person['bonus']/person['salary']
 ```
 
+##### Feature scaling
+
+Some algorithms are sensitive to feature scaling.
+Common feature scaling techniques are *standardization* and *normalization*.
+I did not implement feature scaling since the algorithms I've used in this study did not require it.
+
 ##### Feature Selection
 
 Feature selection was performed using the automated function *SelectKBest*.
@@ -113,10 +119,16 @@ The idea was to promote models with good precision and recall. However we want t
 
 The idea of giving more relevance to *Recall* is because in the investigation we would rather have False Positives (i.e., people that are not of interest but were falsely identified) than False Negatives (i.e., people that are of interest and will not be indicated for investigation by our model).
 
-Some machine learning algorithms are highly sensible to parameters (e.g., SVMs).
-In these case, we do not have such kind of algorithms.
-We have tuned Random Forest to 100 trees, since this is a common setting for this algorithm.
-If you wanted to tune a algorithm we would try tunning the algorithm with a set of different settings, perhaps using a grid search.
+##### Parameter Tuning
+Some machine learning algorithms are highly sensitive to parameters (e.g., SVMs).
+Thus, it is important to make sure the algorithm is executed with the set of parameters that are optimal for the given problem.
+This can be implemented using a *Grid Search* in which the same algorithm is consecutively experimented with different settings.
+The optimal set of parameters is selected from the model that had the best performance.
+Performance metrics can be *Recall*, *Precision*, or *F1*.
+In this study, I have not included algorithms that would benefit from parameter tuning.
+I have tuned Random Forest to 100 trees, since this is a common setting for this algorithm.
+
+##### Results of the algorithm and feature selection
 
 The best model was produced using **Gaussian Naive Bayes** with the following feature set:
 
@@ -135,6 +147,10 @@ F1 | 0.67
 
 This model has a recall of 0.67 meaning that we expect that we are only able to detect 67% of people that actually is of interest.
 A precision of 0.67, meaning that we expect that 67% of people indicated as POI will actually be a POI.
+
+##### Validation results
+
+
 
 
 ##### Model Validation
