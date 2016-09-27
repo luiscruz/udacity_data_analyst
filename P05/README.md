@@ -37,6 +37,9 @@ long\_term\_incentive | 80
 email\_address | 34
 from\_poi\_to\_this\_person | 59
 
+Allocation across classes POI and Non POI is illustrated in the Figure below. Data is unbalanced, since we have considerably more data points for non POIs.
+
+![Data Balance](figures/data_balance.png)
 #### Outlier removal
 
 While analyzing Expenses using the plot below, an outlier was identified.
