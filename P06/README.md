@@ -16,6 +16,8 @@ The final version of the visualization can be reached [here](https://rawgit.com/
 
 ## Feedback
 
+### Feedback at [Udacity Discussion Forum](https://discussions.udacity.com/t/p06-feedback-request-on-what-makes-you-stop-using-an-app/190034)
+
 #### Rui ([ruimaranhao](https://discussions.udacity.com/users/ruimaranhao/activity))
 
 > This visualization is interesting. I wonder if you could show the same message for different demographics?
