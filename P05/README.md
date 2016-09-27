@@ -39,14 +39,6 @@ from\_poi\_to\_this\_person | 59
 
 #### Outlier removal
 
-
-
-![Expenses](figures/expenses.png)
-
-We can see that there is an outlier.
-This outlier is a stored with the name 'TOTAL' which means that such item should be removed from our data.
-
-
 While analyzing Expenses using the plot below, an outlier was identified.
 The plot shows the values of expenses per person.
 Apparently 'TOTAL' was stored as a person.
@@ -108,9 +100,9 @@ I.e., for every combination of features with length from 2 to 5, a model was gen
 Several subsets of the feature set were experimented by generating subsets of size 2,3,4, and 5.
 This optimization used the following evaluation function for the resultant model:
 
-\begin{function}
+```
 f(x) = Precision+1.2*Recall+1-abs(Precision-Recall)
-\end{function}
+```
 
 The idea was to promote models with good precision and recall. However we want to emphasize recall (using a 1.2 factor) while having a small difference between the two measures. 
 
@@ -146,4 +138,4 @@ Two distinct sets were extracted from the original dataset --- train set and tes
 This is an important step since, a common mistake is using data in the test phase that was already used to create the model, leading to **overfitting**.
 
 ----
-**Note:** Further details about the data exploration can be found in the IPython Notebook ```Data exploration.ipynb```
+**Note:** Further details about the data exploration can be found in the IPython Notebook ```./src/Data\ exploration.ipynb```
