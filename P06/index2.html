@@ -52,7 +52,6 @@
       var myChart = new dimple.chart(svg, data);
       myChart.setBounds(300, 50, 500, 330);
       x = myChart.addMeasureAxis("x", "value");
-      x.tickFormat = function(n){""+n*100+"%"};
       var y = myChart.addCategoryAxis("y", ["answer", "platform"]);
       y.addOrderRule("value");
       var s = myChart.addSeries("platform", dimple.plot.bar);
@@ -62,7 +61,7 @@
                 new dimple.color("#ffcc66", "#ffc34d", 1), // pastel
                 new dimple.color("#80aaff", "#6699ff", 1), // blue
       ]
-      x.title = "Percentage of users";
+      x.title = "Portion of users";
       y.title = "Answer/Platform";
       
     // add title

@@ -33,12 +33,29 @@ The final version of the visualization can be reached [here](https://rawgit.com/
 
 > Note that some recommended palettes can be found in the course materials.
 
+### Feedback at Google+
+This feedback was given upon the second version of the visualization. In this version, colors had already been reviewed.
+
+#### [Eilan Ou](https://plus.google.com/113309008589435841729)
+
+> - What is the first thing you notice in the visualization? iOS and Android users have similar responses
+> - Is the visualization appealing? Is it simple? It's simple. Contrasting but softened color choices are good. 
+> - What is the main message? Many apps are not needed for users.
+> - What do you think would make the message clearer? Groups response categories
+> - How would you improve the visualization? My instinct is that people are more familiar with percentage than portion. And personally I want to compare iOS/Android more easily.
+
+> Hope this helps :-)
+
+
 ### Improvements
 
 Unfortunately, the dataset made public by the authors does not provide demographics or any other personal information about participants.
 Thus, some of the suggested improvements could not be implemented.
 
-The color palette used was reviewed. Colorblind readers should not have a problem reading the visualization and less bright colors were used.
+The color palette used was reviewed. Colorblind readers should not have a problem reading the visualization. In addition, less bright colors were used to make sure the visualization is not uncomfortable to the eyes of the reader.
+
+According to Eilan, having values in terms of portion is not intuitive. She suggests using percentage, since readers are more familiar with it.
+
 
 
 ## Resources
