@@ -52,7 +52,7 @@
       var myChart = new dimple.chart(svg, data);
       myChart.setBounds(300, 50, 500, 330);
       x = myChart.addMeasureAxis("x", "value");
-      x.tickFormat = function(n){""+n*100+"%"};
+			x.tickFormat = "%"
       var y = myChart.addCategoryAxis("y", ["answer", "platform"]);
       y.addOrderRule("value");
       var s = myChart.addSeries("platform", dimple.plot.bar);
