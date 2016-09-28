@@ -54,7 +54,9 @@ Thus, some of the suggested improvements could not be implemented.
 
 The color palette used was reviewed. Colorblind readers should not have a problem reading the visualization. In addition, less bright colors were used to make sure the visualization is not uncomfortable to the eyes of the reader.
 
-According to Eilan, having values in terms of portion is not intuitive. She suggests using percentage, since readers are more familiar with it.
+According to Eilan, having values in terms of portion is not intuitive.
+I've changed the visualization to show percentage, since readers are more familiar with it.
+
 
 
 
