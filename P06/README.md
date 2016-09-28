@@ -33,7 +33,7 @@ The final version of the visualization can be reached [here](https://rawgit.com/
 
 > Note that some recommended palettes can be found in the course materials.
 
-### Feedback at Google+
+### Feedback at [Google+](https://plus.google.com/100680226865763721677/posts/gMBhUaoW9cx)
 This feedback was given upon the second version of the visualization. In this version, colors had already been reviewed.
 
 #### [Eilan Ou](https://plus.google.com/113309008589435841729)
