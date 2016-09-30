@@ -44,14 +44,14 @@
 
   <script type="text/javascript">
   var svg = dimple.newSvg("#canvas", 900, 420);
-  d3.csv("./data/data_dimple_agg_user_dropoff.csv", function(data) {
+  d3.csv("./data/data_dimple_agg_user_dropoff.csv", function (data) {
     var myChart = new dimple.chart(svg, data);
     myChart.setBounds(300, 50, 500, 330);
     x = myChart.addMeasureAxis("x", "value");
-    x.tickFormat = function(n){""+n*100+"%"};
+		x.tickFormat = "%"
     var y = myChart.addCategoryAxis("y", ["answer", "platform"]);
     y.addOrderRule("value");
-    var s = myChart.addSeries("platform", dimple.plot.bar);
+    myChart.addSeries("platform", dimple.plot.bar);
     myChart.addLegend(65, 30, 720, 20, "right");
     myChart.defaultColors = [
       new dimple.color("#ffcc66", "#ffc34d", 1), // pastel
@@ -59,7 +59,7 @@
     ]
     x.title = "Percentage of users";
     y.title = "Answer/Platform";
-      
+    
     // add title
     svg.append("text")
       .attr("x", myChart._xPixels() + myChart._widthPixels() / 2 -150)
