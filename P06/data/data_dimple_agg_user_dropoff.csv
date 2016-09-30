@@ -1,31 +1,31 @@
 ,platform,value,answer
-0,Android,0.0743743916166,It crashes.
-1,Apple,0.0770805080981,It crashes.
-2,Android,0.0969185620726,I found better alternatives.
-3,Apple,0.108779557581,I found better alternatives.
-4,Android,0.0579057873738,The advertisements are annoying.
-5,Apple,0.0584037239125,The advertisements are annoying.
-6,Android,0.0549007856871,It is difficult to use.
-7,Apple,0.0641958959718,It is difficult to use.
-8,Android,0.0180853301829,It is no longer used by my friends and/or family.
-9,Apple,0.0212902937463,It is no longer used by my friends and/or family.
-10,Android,0.0523520382246,I need to pay extra for the features I need.
-11,Apple,0.0629973717302,I need to pay extra for the features I need.
-12,Android,0.0357264410811,I forgot about the app.
-13,Apple,0.0465829370673,I forgot about the app.
-14,Android,0.0724994609269,I do not need the features it provides.
-15,Apple,0.0549785477623,I do not need the features it provides.
-16,Android,0.0336917670912,It invades my privacy.
-17,Apple,0.0333189722867,It invades my privacy.
-18,Android,0.0823106638786,It is too slow.
-19,Apple,0.0576437587201,It is too slow.
-20,Android,0.109241057071,I got bored of it.
-21,Apple,0.121967489458,I got bored of it.
-22,Android,0.0719805613063,It does not work.
-23,Apple,0.0606569066941,It does not work.
-24,Android,0.0816457250428,It does not have the features I hoped for.
-25,Apple,0.0865347796365,It does not have the features I hoped for.
-26,Android,0.131165908546,I don't need it anymore.
-27,Apple,0.139378530254,I don't need it anymore.
-28,Android,0.0272015198987,Other (please specify)
-29,Apple,0.00619072708114,Other (please specify)
+0,Android,0.0891203703704,It crashes.
+1,Apple,0.0869064084832,It crashes.
+2,Android,0.0971064814815,I found better alternatives.
+3,Apple,0.104656523744,I found better alternatives.
+4,Android,0.0627314814815,The advertisements are annoying.
+5,Apple,0.0661595205164,The advertisements are annoying.
+6,Android,0.0626157407407,It is difficult to use.
+7,Apple,0.0677731673582,It is difficult to use.
+8,Android,0.0181712962963,It is no longer used by my friends and/or family.
+9,Apple,0.0212079299216,It is no longer used by my friends and/or family.
+10,Android,0.0582175925926,I need to pay extra for the features I need.
+11,Apple,0.0675426463808,I need to pay extra for the features I need.
+12,Android,0.0325231481481,I forgot about the app.
+13,Apple,0.0440295066851,I forgot about the app.
+14,Android,0.0649305555556,I do not need the features it provides.
+15,Apple,0.0555555555556,I do not need the features it provides.
+16,Android,0.0428240740741,It invades my privacy.
+17,Apple,0.0424158598432,It invades my privacy.
+18,Android,0.0913194444444,It is too slow.
+19,Apple,0.0654679575841,It is too slow.
+20,Android,0.094212962963,I got bored of it.
+21,Apple,0.105809128631,I got bored of it.
+22,Android,0.0809027777778,It does not work.
+23,Apple,0.0696173351775,It does not work.
+24,Android,0.0872685185185,It does not have the features I hoped for.
+25,Apple,0.087367450438,It does not have the features I hoped for.
+26,Android,0.110300925926,I don't need it anymore.
+27,Apple,0.113416320885,I don't need it anymore.
+28,Android,0.00775462962963,Other (please specify)
+29,Apple,0.00207468879668,Other (please specify)

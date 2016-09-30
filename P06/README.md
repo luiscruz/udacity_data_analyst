@@ -14,6 +14,11 @@ The position was used for the answer selected by the participant.
 
 The final version of the visualization can be reached [here](https://rawgit.com/luiscruz/udacity_data_analyst/master/P06/index.html).
 
+## Findings
+- Android and iOS users agree reasons to stop using an app
+- Slow performance causes more Android users to stop using an app than iPhone users
+- The visualization suggests that privacy is not a big concern among users of both platforms (4%).
+
 ## Feedback
 
 ### Feedback at [Udacity Discussion Forum](https://discussions.udacity.com/t/p06-feedback-request-on-what-makes-you-stop-using-an-app/190034)
@@ -56,8 +61,6 @@ The color palette used was reviewed. Colorblind readers should not have a proble
 
 According to Eilan, having values in terms of portion is not intuitive.
 I've changed the visualization to show percentage, since readers are more familiar with it.
-
-
 
 
 ## Resources
